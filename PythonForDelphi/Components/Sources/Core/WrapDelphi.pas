@@ -2303,6 +2303,11 @@ begin
       ret := meth.Invoke(DelphiObject, Params);
       if ret.Kind = tkClass then
         Result := Wrapper.Wrap(ret.AsObject)
+      else if ret.Kind = tkEnumeration then
+      begin
+        if ret.TypeInfo^.Name = 'Boolean' then
+          Result := VariantAsPyObject(ret.AsBoolean);
+      end
       else
         Result := VariantAsPyObject(ret.AsVariant);
     except
