@@ -2306,7 +2306,9 @@ begin
       else if ret.Kind = tkEnumeration then
       begin
         if ret.TypeInfo^.Name = 'Boolean' then
-          Result := VariantAsPyObject(ret.AsBoolean);
+          Result := VariantAsPyObject(ret.AsBoolean)
+        else
+          Result := VariantAsPyObject(ret.AsVariant);
       end
       else
         Result := VariantAsPyObject(ret.AsVariant);
